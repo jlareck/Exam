@@ -34,15 +34,14 @@ class Country2: BaseCountry{
         averageNumberProducingRawMaterials = averageProducing
         averageNumberConsumptionProducts = averageConsumption
         for (key,value) in averageProducing{
-            realNumberProducingRawMaterials[key] = Int.random(in: value-a..<value+a)
+            realNumberProducingRawMaterials[key] = 4 //Int.random(in: value-a..<value+a)
         }
         for (key,value) in averageConsumption{
-            realNumberConsumptionProducts[key] = Int.random(in: value-a..<value+a)
+            realNumberConsumptionProducts[key] =  6  //Int.random(in: value-a..<value+a)
         }
-        exportProducts = realNumberProducingRawMaterials
-        importProducts = realNumberConsumptionProducts
+        produce()
     }
-    func produce()->(){
+    func produce() {
         //var consumedProducts = realNumberConsumptionProducts // товари які в ідеалі треба виготовити
         //var materials = realNumberProducingRawMaterials // матеріали які є
        // var producedProducts = [Product: Int]() // товари які виготовляться з матеріалу
@@ -53,13 +52,23 @@ class Country2: BaseCountry{
         
         for (key,value) in realNumberConsumptionProducts{// продукти які треба виробити і їхня кількість
             var count = 0
-            
+            var checkIfIsDeficit = false
             while(count < value){
                 var flag: Bool = true
+                if (checkIfIsDeficit){
+                    break;
+                }
                 for (materialKey, materialValue) in key.rawMaterials{// матеріали для кожного продукту і потрібана кількість, якщо з сировини хватає то
                     //producedProducts[key]!+=1
                     if (materialValue > realNumberProducingRawMaterials[materialKey]!){
-                        importProducts[materialKey]! += materialValue - realNumberProducingRawMaterials[materialKey]! + (value-count-1)*materialValue
+                        if (importProducts[materialKey] == nil){
+                            importProducts[materialKey] = materialValue - realNumberProducingRawMaterials[materialKey]! + (value-count-1)*materialValue
+                            checkIfIsDeficit = true
+                        }
+                        else{
+                            importProducts[materialKey]! += materialValue - realNumberProducingRawMaterials[materialKey]! + (value-count-1)*materialValue
+                        }
+                        
                         flag = false
                         break;
                     }
@@ -75,7 +84,7 @@ class Country2: BaseCountry{
         }
         
         for (key, value) in realNumberProducingRawMaterials{
-            if (value > 0){
+            if (importProducts[key] == nil){
                 exportProducts[key] = value
             }
         }
