@@ -34,10 +34,10 @@ class Country2: BaseCountry{
         averageNumberProducingRawMaterials = averageProducing
         averageNumberConsumptionProducts = averageConsumption
         for (key,value) in averageProducing{
-            realNumberProducingRawMaterials[key] = 4 //Int.random(in: value-a..<value+a)
+            realNumberProducingRawMaterials[key] = Int.random(in: value-a..<value+a)
         }
         for (key,value) in averageConsumption{
-            realNumberConsumptionProducts[key] =  6  //Int.random(in: value-a..<value+a)
+            realNumberConsumptionProducts[key] =  Int.random(in: value-a..<value+a)
         }
         produce()
     }
@@ -60,7 +60,16 @@ class Country2: BaseCountry{
                 }
                 for (materialKey, materialValue) in key.rawMaterials{// матеріали для кожного продукту і потрібана кількість, якщо з сировини хватає то
                     //producedProducts[key]!+=1
-                    if (materialValue > realNumberProducingRawMaterials[materialKey]!){
+                    if(realNumberProducingRawMaterials[materialKey]==nil){
+                        if (importProducts[materialKey] == nil){
+                            importProducts[materialKey] = materialValue + (value-count-1)*materialValue
+                            checkIfIsDeficit = true
+                        }
+                        else{
+                            importProducts[materialKey]! += materialValue + (value-count-1)*materialValue
+                        }
+                    }
+                    else if (materialValue > realNumberProducingRawMaterials[materialKey]!){
                         if (importProducts[materialKey] == nil){
                             importProducts[materialKey] = materialValue - realNumberProducingRawMaterials[materialKey]! + (value-count-1)*materialValue
                             checkIfIsDeficit = true
