@@ -7,12 +7,10 @@
 //
 
 import Foundation
-class Product: BaseProduct{
+class Product: BaseProduct {
     var rawMaterials: [RawMaterial: Int]
 
     init(n: String, rawMaterials: [RawMaterial: Int]){
-
-
         self.rawMaterials = rawMaterials
         super.init(name: n)
     }
