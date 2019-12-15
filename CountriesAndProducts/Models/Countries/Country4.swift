@@ -7,26 +7,19 @@
 //
 
 import Foundation
-class Country4: BaseCountry{
-    var name: String
+class Country4: BaseCountry {
     
-    var averageNumberProducingRawMaterials: [RawMaterial : Int]
+    let name: String
+    private(set)var averageNumberProducingRawMaterials: [RawMaterial : Int]
+    private(set)var averageNumberConsumptionProducts: [Product : Int]
+    private(set)var realNumberProducingRawMaterials = [RawMaterial : Int]()
+    private(set)var realNumberConsumptionProducts = [Product : Int]()
+    private(set)var exportProducts = [BaseProduct : Int]()
+    private(set)var importProducts = [BaseProduct : Int]()
+    private(set)var producedProducts = [BaseProduct : Int]()
+    private(set)var popularProducts = [Product]()
     
-    var averageNumberConsumptionProducts: [Product : Int]
-    
-    var realNumberProducingRawMaterials = [RawMaterial : Int]()
-    
-    var realNumberConsumptionProducts = [Product : Int]()
-    
-    var exportProducts = [BaseProduct : Int]()
-    
-    var importProducts = [BaseProduct : Int]()
-    
-    var producedProducts = [BaseProduct : Int]()
-    
-    var popularProducts = [Product]()
-    
-    init (name: String, averageProducing: [RawMaterial: Int], averageConsumption:[Product: Int], a:Int, popularProducts: [Product]) {
+    init (name: String, averageProducing: [RawMaterial: Int], averageConsumption: [Product: Int], a: Int, popularProducts: [Product]) {
         
         self.name = name
         averageNumberProducingRawMaterials = averageProducing
@@ -40,7 +33,7 @@ class Country4: BaseCountry{
         self.popularProducts = popularProducts
         produce()
     }
-    func produce() {
+    private func produce() {
         //var consumedProducts = realNumberConsumptionProducts // товари які в ідеалі треба виготовити
         var materials = realNumberProducingRawMaterials // матеріали які є
         // var producedProducts = [Product: Int]() // товари які виготовляться з матеріалу

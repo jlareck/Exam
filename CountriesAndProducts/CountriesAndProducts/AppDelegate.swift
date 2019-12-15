@@ -14,7 +14,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+//        let A = RawMaterial(n: "A")
+//        let P = Product(n: "P1", rawMaterials: [A:110])
+//        //let amount = 3
+//        let country = Country3(name: "NNN", averageProducing: [A:100], averageConsumption: [P:7], a: 2, traditionalProducts: [P])
+//        print(country.importProducts)
+        //Interactor.shared.timeline()
+        
         return true
     }
 

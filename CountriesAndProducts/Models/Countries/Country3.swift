@@ -7,26 +7,19 @@
 //
 
 import Foundation
-class Country3: BaseCountry{
-    var name: String
+class Country3: BaseCountry {
     
-    var averageNumberProducingRawMaterials: [RawMaterial : Int]
+    let name: String
+    private(set)var averageNumberProducingRawMaterials: [RawMaterial : Int]
+    private(set)var averageNumberConsumptionProducts: [Product : Int]
+    private(set)var realNumberProducingRawMaterials = [RawMaterial : Int]()
+    private(set)var realNumberConsumptionProducts = [Product : Int]()
+    private(set)var exportProducts = [BaseProduct : Int]()
+    private(set)var importProducts = [BaseProduct : Int]()
+    private(set)var producedProducts = [BaseProduct : Int]()
+    private(set)var traditionalProducts = [Product]()
     
-    var averageNumberConsumptionProducts: [Product : Int]
-    
-    var realNumberProducingRawMaterials = [RawMaterial : Int]()
-    
-    var realNumberConsumptionProducts = [Product : Int]()
-    
-    var exportProducts = [BaseProduct : Int]()
-    
-    var importProducts = [BaseProduct : Int]()
-    
-    var producedProducts = [BaseProduct : Int]()
-    
-    var traditionalProducts = [Product]()
-    
-    init (name: String, averageProducing: [RawMaterial: Int], averageConsumption:[Product: Int], a:Int, traditionalProducts: [Product]) {
+    init (name: String, averageProducing: [RawMaterial: Int], averageConsumption: [Product: Int], a: Int, traditionalProducts: [Product]) {
         
         self.name = name
         averageNumberProducingRawMaterials = averageProducing
@@ -40,23 +33,21 @@ class Country3: BaseCountry{
         self.traditionalProducts = traditionalProducts
         produce()
     }
-    func produce() {
+    private func produce() {
         //var consumedProducts = realNumberConsumptionProducts // товари які в ідеалі треба виготовити
         var materials = realNumberProducingRawMaterials // матеріали які є
         // var producedProducts = [Product: Int]() // товари які виготовляться з матеріалу
         
-        for key in traditionalProducts{
-            producedProducts[key] = 0
-        }
+        traditionalProducts.forEach({producedProducts[$0] = 0})
         
-        for (key,value) in realNumberConsumptionProducts{// продукти які треба виробити і їхня кількість
+        for (key,value) in realNumberConsumptionProducts {// продукти які треба виробити і їхня кількість
             var count = 0
             var checkIfIsDeficit = false
             if (!traditionalProducts.contains(key)) {
                 importProducts[key] = value
             }
             else {
-                while(count < value ){
+                while(count < value ) {
                     var flag: Bool = true
                     if (checkIfIsDeficit){
                         break;
@@ -99,9 +90,9 @@ class Country3: BaseCountry{
                         checkIfImportIsOnlyRawMaterial = false
                     }
                 }
-                if(checkIfImportIsOnlyRawMaterial){
+                if(checkIfImportIsOnlyRawMaterial) {
                     
-                    for t in traditionalProducts{
+                    for t in traditionalProducts {
                         var checkIfCurrentProductCanBeProduced = true
                         while(checkIfCurrentProductCanBeProduced){
                             for (materialKey, materialValue) in t.rawMaterials {

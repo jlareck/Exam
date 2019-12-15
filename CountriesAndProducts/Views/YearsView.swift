@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  CountriesView.swift
 //  CountriesAndProducts
 //
 //  Created by Mykola Medynsky on 12/14/19.
@@ -15,31 +15,30 @@ private let dateFormatter: DateFormatter = {
     return dateFormatter
 }()
 
-struct ContentView: View {
-    @State private var dates = [Date]()
-
+struct YearsView: View {
+    @ObservedObject var interactor: YearsInteractor
+    
+    var years: [Int] {
+        let keys = interactor.timelineCountries.keys
+        let sortedKeys = keys.sorted { (l, r) -> Bool in
+            return l < r
+        }
+        return sortedKeys
+    }
+    
     var body: some View {
         NavigationView {
-            MasterView(dates: $dates)
-                .navigationBarTitle(Text("Master"))
-                .navigationBarItems(
-                    leading: EditButton(),
-                    trailing: Button(
-                        action: {
-                            withAnimation { self.dates.insert(Date(), at: 0) }
-                        }
-                    ) {
-                        Image(systemName: "plus")
-                    }
-                )
-            DetailView()
-        }.navigationViewStyle(DoubleColumnNavigationViewStyle())
+            List(years, id: \.self) { year in
+                NavigationLink.init(String.init(year), destination: ChoiceView(interactor: self.interactor.getChoiceInteractor(for: year)))
+                
+            }.navigationBarTitle("Years")
+        }
     }
+    
 }
-
 struct MasterView: View {
     @Binding var dates: [Date]
-
+    
     var body: some View {
         List {
             ForEach(dates, id: \.self) { date in
@@ -57,7 +56,7 @@ struct MasterView: View {
 
 struct DetailView: View {
     var selectedDate: Date?
-
+    
     var body: some View {
         Group {
             if selectedDate != nil {
@@ -72,6 +71,6 @@ struct DetailView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        YearsView(interactor: YearsInteractor.init())
     }
 }
