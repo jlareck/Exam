@@ -63,8 +63,8 @@ class YearsInteractor: ObservableObject {
     func getPopularProducts(countries: [BaseCountry])->([Product]){
         var products = [BaseProduct: Int]()
         for country in countries{
-            for (p,count) in country.importProducts{
-                if let a = p as? Product{
+            for (product,count) in country.importProducts {
+                if let a = product as? Product{
                     if(products[a]==nil){
                         products[a] = count
                     }
@@ -74,8 +74,8 @@ class YearsInteractor: ObservableObject {
                     
                 }
             }
-            for (p,count) in country.exportProducts{
-                if let a = p as? Product{
+            for (product,count) in country.exportProducts {
+                if let a = product as? Product{
                     if(products[a]==nil){
                         products[a] = -count
                     }
@@ -86,9 +86,9 @@ class YearsInteractor: ObservableObject {
             }
         }
         var popularProducts = [Product]()
-        for (p, count) in products{
+        for (product, count) in products{
             if(count>0){
-                popularProducts.append(p as! Product)
+                popularProducts.append(product as! Product)
             }
         }
         return popularProducts
@@ -96,7 +96,7 @@ class YearsInteractor: ObservableObject {
     func getBalance(countries:[BaseCountry]) -> [BaseProduct:Int] {
         var products = [BaseProduct: Int]()
         for country in countries {
-            for (p,count) in country.importProducts{
+            for (p,count) in country.importProducts {
                 
                 if(products[p]==nil) {
                     products[p] = count
@@ -107,7 +107,7 @@ class YearsInteractor: ObservableObject {
                 
                 
             }
-            for (p,count) in country.exportProducts{
+            for (p,count) in country.exportProducts {
                 if(products[p]==nil) {
                     products[p] = -count
                 }

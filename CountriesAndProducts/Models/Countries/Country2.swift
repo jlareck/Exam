@@ -32,15 +32,19 @@ class Country2: BaseCountry {
         produce()
     }
     private func produce() {
-       // var consumedProducts = realNumberConsumptionProducts // товари які в ідеалі треба виготовити
-        var materials = realNumberProducingRawMaterials // матеріали які є
-       // var producedProducts = [Product: Int]() // товари які виготовляться з матеріалу
+      
+        var materials = realNumberProducingRawMaterials
+      
         
         for (key,_) in realNumberConsumptionProducts{
             producedProducts[key] = 0
         }
+        for (key,value) in realNumberProducingRawMaterials{
+            producedProducts[key] = value
+        }
         
-        for (key,value) in realNumberConsumptionProducts{// продукти які треба виробити і їхня кількість
+        
+        for (key,value) in realNumberConsumptionProducts{
             var count = 0
             var checkIfIsDeficit = false
             while(count < value){
@@ -48,7 +52,7 @@ class Country2: BaseCountry {
                 if (checkIfIsDeficit){
                     break;
                 }
-                for (materialKey, materialValue) in key.rawMaterials{// матеріали для кожного продукту і потрібана кількість, якщо з сировини хватає то
+                for (materialKey, materialValue) in key.rawMaterials{
                     //producedProducts[key]!+=1
                     if(materials[materialKey]==nil){
                         if (importProducts[materialKey] == nil){
