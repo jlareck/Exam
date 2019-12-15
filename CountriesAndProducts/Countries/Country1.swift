@@ -28,7 +28,7 @@ class Country1: BaseCountry{
     var producedProducts = [BaseProduct: Int]()
     
     
-   internal init(name: String,averageProducing: [RawMaterial: Int], averageConsumption:[Product: Int], a:Int) {
+    init(name: String,averageProducing: [RawMaterial: Int], averageConsumption:[Product: Int], a:Int) {
        self.name = name
         averageNumberProducingRawMaterials = averageProducing
         averageNumberConsumptionProducts = averageConsumption
@@ -40,7 +40,7 @@ class Country1: BaseCountry{
         }
         exportProducts = realNumberProducingRawMaterials
         importProducts = realNumberConsumptionProducts
-   }
+    }
 //
 //    init (name: String, averageProducing: [RawMaterial: Int], averageConsumption:[Product: Int], a:Int) {
 //

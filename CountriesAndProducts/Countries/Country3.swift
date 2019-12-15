@@ -32,17 +32,17 @@ class Country3: BaseCountry{
         averageNumberProducingRawMaterials = averageProducing
         averageNumberConsumptionProducts = averageConsumption
         for (key,value) in averageProducing{
-            realNumberProducingRawMaterials[key] = Int.random(in: value-a..<value+a)
+            realNumberProducingRawMaterials[key] = value //Int.random(in: value-a..<value+a)
         }
         for (key,value) in averageConsumption{
-            realNumberConsumptionProducts[key] =  Int.random(in: value-a..<value+a)
+            realNumberConsumptionProducts[key] = value //Int.random(in: value-a..<value+a)
         }
         self.traditionalProducts = traditionalProducts
         produce()
     }
     func produce() {
         //var consumedProducts = realNumberConsumptionProducts // товари які в ідеалі треба виготовити
-        //var materials = realNumberProducingRawMaterials // матеріали які є
+        var materials = realNumberProducingRawMaterials // матеріали які є
         // var producedProducts = [Product: Int]() // товари які виготовляться з матеріалу
         
         for key in traditionalProducts{
@@ -63,7 +63,7 @@ class Country3: BaseCountry{
                     }
                     for (materialKey, materialValue) in key.rawMaterials {// матеріали для кожного продукту і потрібана кількість, якщо з сировини хватає то
                         
-                        if(realNumberProducingRawMaterials[materialKey] == nil){
+                        if(materials[materialKey] == nil){
                             if (importProducts[materialKey] == nil){
                                 importProducts[materialKey] = materialValue + (value-count-1)*materialValue
                                 checkIfIsDeficit = true
@@ -72,20 +72,20 @@ class Country3: BaseCountry{
                                 importProducts[materialKey]! += materialValue + (value-count-1)*materialValue
                             }
                         }
-                        else if (materialValue > realNumberProducingRawMaterials[materialKey]!){
+                        else if (materialValue > materials[materialKey]!){
                             if (importProducts[materialKey] == nil){
-                                importProducts[materialKey] = materialValue - realNumberProducingRawMaterials[materialKey]! + (value-count-1)*materialValue
+                                importProducts[materialKey] = materialValue - materials[materialKey]! + (value-count-1)*materialValue
                                 checkIfIsDeficit = true
                             }
                             else{
-                                importProducts[materialKey]! += materialValue - realNumberProducingRawMaterials[materialKey]! + (value-count-1)*materialValue
+                                importProducts[materialKey]! += materialValue - materials[materialKey]! + (value-count-1)*materialValue
                             }
-                            
+                            materials[materialKey] = 0
                             flag = false
                             break;
                         }
                         else{
-                            realNumberProducingRawMaterials[materialKey]! -= materialValue
+                            materials[materialKey]! -= materialValue
                         }
                     }
                     if (flag){
@@ -105,12 +105,12 @@ class Country3: BaseCountry{
                         var checkIfCurrentProductCanBeProduced = true
                         while(checkIfCurrentProductCanBeProduced){
                             for (materialKey, materialValue) in t.rawMaterials {
-                                if(materialValue > realNumberProducingRawMaterials[materialKey]!){
+                                if(materialValue > materials[materialKey]!){
                                     checkIfCurrentProductCanBeProduced = false
                                     break;
                                 }
                                 else {
-                                    realNumberProducingRawMaterials[materialKey]! -= materialValue
+                                    materials[materialKey]! -= materialValue
                                 }
                             }
                             if(checkIfCurrentProductCanBeProduced){
