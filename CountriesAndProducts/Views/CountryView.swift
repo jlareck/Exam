@@ -28,9 +28,3 @@ struct CountryView: View {
         }.navigationBarTitle(countryName)
     }
 }
-
-//struct CountryView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        CountryView()
-//    }
-//}

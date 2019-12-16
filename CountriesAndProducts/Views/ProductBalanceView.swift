@@ -17,9 +17,3 @@ struct ProductBalanceView: View {
         }.navigationBarTitle("Product Balance")
     }
 }
-
-//struct ProductBalanceView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ProductBalanceView()
-//    }
-//}

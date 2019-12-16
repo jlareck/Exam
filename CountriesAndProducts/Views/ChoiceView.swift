@@ -21,9 +21,3 @@ struct ChoiceView: View {
             }).navigationBarTitle("Select action")
     }
 }
-
-//struct ChoiceView_Previews: PreviewProvider {
-//    static var previews: some View {
-//       ChoiceView()
-//    }
-//}

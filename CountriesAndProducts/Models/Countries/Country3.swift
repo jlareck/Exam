@@ -18,13 +18,8 @@ class Country3: BaseCountry {
         produce()
     }
     override func produce() {
-        
-        var materials = realNumberProducingRawMaterials 
-    
-        
+        var materials = realNumberProducingRawMaterials
         traditionalProducts.forEach({producedProducts[$0] = 0})
-        
-        
         for (key,value) in realNumberProducingRawMaterials{
             producedProducts[key] = value
         }

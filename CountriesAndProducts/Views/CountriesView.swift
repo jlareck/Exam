@@ -31,8 +31,3 @@ struct CountriesView: View {
     }
 }
 
-//struct CountriesView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        CountriesView()
-//    }
-//}
