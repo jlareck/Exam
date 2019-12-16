@@ -23,13 +23,14 @@ class Country1: BaseCountry {
         averageNumberProducingRawMaterials = averageProducing
         averageNumberConsumptionProducts = averageConsumption
         for (key,value) in averageProducing{
-            realNumberProducingRawMaterials[key] = Int.random(in: value-a..<value+a)
+            realNumberProducingRawMaterials[key] = averageProducing[key]//Int.random(in: value-a..<value+a)
         }
         for (key,value) in averageConsumption{
-            realNumberConsumptionProducts[key] = Int.random(in: value-a..<value+a)
+            realNumberConsumptionProducts[key] = averageConsumption[key]//Int.random(in: value-a..<value+a)
         }
         exportProducts = realNumberProducingRawMaterials
         importProducts = realNumberConsumptionProducts
+        producedProducts = realNumberProducingRawMaterials
     }
     
 }

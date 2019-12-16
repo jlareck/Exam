@@ -98,7 +98,7 @@ class Country4: BaseCountry {
                         var checkIfCurrentProductCanBeProduced = true
                         while(checkIfCurrentProductCanBeProduced){
                             for (materialKey, materialValue) in p.rawMaterials {
-                                if(materialValue > materials[materialKey]!){
+                                if(materials[materialKey]==nil || materialValue > materials[materialKey]!){
                                     checkIfCurrentProductCanBeProduced = false
                                     break;
                                 }

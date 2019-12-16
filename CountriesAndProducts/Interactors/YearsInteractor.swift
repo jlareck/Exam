@@ -24,18 +24,20 @@ class YearsInteractor: ObservableObject {
     
     private func timeline()->[Int: [BaseCountry]]{
         var countries = [Int: [BaseCountry]]()
-        let r1 = RawMaterial(n: "R1")
-        let r2 = RawMaterial(n: "R2")
-        let r3 = RawMaterial(n: "R3")
-        let p1 = Product(n: "P1", rawMaterials: [r1: 10, r3: 4])
-        let p2 = Product(n: "P2", rawMaterials: [r2: 3])
-        for i in 0...4 {
+        let r1 = RawMaterial(n: "Jewelery")
+        let r2 = RawMaterial(n: "Petroleum")
+        let r3 = RawMaterial(n: "Gold")
+        let r4 = RawMaterial(n: "Plants")
+        
+        let p1 = Product(n: "Crown", rawMaterials: [r1: 10, r3: 4])
+        let p2 = Product(n: "Plastics", rawMaterials: [r2: 3, r4:10])
+        for i in 2000...2004 {
             if (i == 0) {
-                let country1 = Country1(name: "C1", averageProducing: [r1: 30, r2: 20, r3: 5], averageConsumption: [p1:2, p2:1], a: 4 )
-                let country2 = Country2(name: "C2", averageProducing: [r1: 15, r2: 10, r3: 12], averageConsumption: [p1:1, p2:1], a: 4 )
-                let country3 = Country3(name: "C3", averageProducing: [r1: 50, r2: 10, r3: 70], averageConsumption: [p1:1, p2:1], a: 4, traditionalProducts: [p1] )
+                let country1 = Country1(name: "Ukraine", averageProducing: [r1: 30, r2: 20, r3: 5, r4: 123], averageConsumption: [p1:2, p2:9], a: 4 )
+                let country2 = Country2(name: "USA", averageProducing: [r1: 15, r2: 10, r3: 12, r4: 2421], averageConsumption: [p1:1, p2:6], a: 4 )
+                let country3 = Country3(name: "Brazil", averageProducing: [r1: 50, r2: 10, r3: 70, r4: 100], averageConsumption: [p1:1, p2:1], a: 4, traditionalProducts: [p2] )
                 
-                let country4 = Country4(name: "C4", averageProducing: [r1: 50, r2: 10, r3: 70], averageConsumption: [p1:1, p2:1], a: 4, popularProducts: [p1] )
+                let country4 = Country4(name: "Belarus", averageProducing: [r1: 50, r2: 10, r3: 70], averageConsumption: [p1:1, p2:3], a: 4, popularProducts: [p1] )
                 countries[i] = []
                 countries[i]?.append(country1)
                 countries[i]?.append(country2)
@@ -44,10 +46,10 @@ class YearsInteractor: ObservableObject {
                 
             }
             else {
-                let country1 = Country1(name: "C1", averageProducing: [r1: 30, r2: 20, r3: 5], averageConsumption: [p1:2, p2:1], a: 4 )
-                let country2 = Country2(name: "C2", averageProducing: [r1: 15, r2: 10, r3: 12], averageConsumption: [p1:1, p2:1], a: 4 )
-                let country3 = Country3(name: "C3", averageProducing: [r1: 50, r2: 10, r3: 70], averageConsumption: [p1:1, p2:1], a: 4, traditionalProducts: [p1] )
-                let country4 = Country4(name: "C4", averageProducing: [r1: 50, r2: 10, r3: 70], averageConsumption: [p1:1, p2:1], a: 4, popularProducts: getPopularProducts(countries: countries[i-1] ?? []))
+                let country1 = Country1(name: "Ukraine", averageProducing: [r1: 30, r2: 20, r3: 5, r4: 123], averageConsumption: [p1:2, p2:9], a: 4 )
+                let country2 = Country2(name: "USA", averageProducing: [r1: 15, r2: 10, r3: 12, r4: 2421], averageConsumption: [p1:1, p2:6], a: 4 )
+                let country3 = Country3(name: "Brazil", averageProducing: [r1: 50, r2: 10, r3: 70, r4: 100], averageConsumption: [p1:1, p2:1], a: 4, traditionalProducts: [p2] )
+                let country4 = Country4(name: "Belarus", averageProducing: [r1: 50, r2: 10, r3: 70], averageConsumption: [p1:1, p2:1], a: 4, popularProducts: getPopularProducts(countries: countries[i-1] ?? []))
                 countries[i] = []
                 countries[i]?.append(country1)
                 countries[i]?.append(country2)
