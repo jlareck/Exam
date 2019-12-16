@@ -66,23 +66,23 @@ class YearsInteractor: ObservableObject {
         var products = [BaseProduct: Int]()
         for country in countries{
             for (product,count) in country.importProducts {
-                if let a = product as? Product{
-                    if(products[a]==nil){
-                        products[a] = count
+                if let ifProduct = product as? Product{
+                    if(products[ifProduct]==nil){
+                        products[ifProduct] = count
                     }
                     else{
-                        products[a]! += count
+                        products[ifProduct]! += count
                     }
                     
                 }
             }
             for (product,count) in country.exportProducts {
-                if let a = product as? Product{
-                    if(products[a]==nil){
-                        products[a] = -count
+                if let ifProduct = product as? Product{
+                    if(products[ifProduct]==nil){
+                        products[ifProduct] = -count
                     }
                     else{
-                        products[a]! -= count
+                        products[ifProduct]! -= count
                     }
                 }
             }
@@ -98,29 +98,29 @@ class YearsInteractor: ObservableObject {
     func getBalance(countries:[BaseCountry]) -> [BaseProduct:Int] {
         var products = [BaseProduct: Int]()
         for country in countries {
-            for (p,count) in country.importProducts {
+            for (product,count) in country.importProducts {
                 
-                if(products[p]==nil) {
-                    products[p] = count
+                if(products[product]==nil) {
+                    products[product] = count
                 }
                 else {
-                    products[p]! += count
+                    products[product]! += count
                 }
                 
                 
             }
-            for (p,count) in country.exportProducts {
-                if(products[p]==nil) {
-                    products[p] = -count
+            for (product,count) in country.exportProducts {
+                if(products[product]==nil) {
+                    products[product] = -count
                 }
                 else {
-                    products[p]! -= count
+                    products[product]! -= count
                 }
             }
         }
-        for (p, count) in products{
+        for (product, count) in products{
             if(count<0){
-                products[p]!*=(-1)
+                products[product]!*=(-1)
             }
         }
         return products

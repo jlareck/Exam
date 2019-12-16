@@ -9,35 +9,15 @@
 import Foundation
 class Country4: BaseCountry {
     
-    let name: String
-    private(set)var averageNumberProducingRawMaterials: [RawMaterial : Int]
-    private(set)var averageNumberConsumptionProducts: [Product : Int]
-    private(set)var realNumberProducingRawMaterials = [RawMaterial : Int]()
-    private(set)var realNumberConsumptionProducts = [Product : Int]()
-    private(set)var exportProducts = [BaseProduct : Int]()
-    private(set)var importProducts = [BaseProduct : Int]()
-    private(set)var producedProducts = [BaseProduct : Int]()
     private(set)var popularProducts = [Product]()
     
     init (name: String, averageProducing: [RawMaterial: Int], averageConsumption: [Product: Int], a: Int, popularProducts: [Product]) {
-        
-        self.name = name
-        averageNumberProducingRawMaterials = averageProducing
-        averageNumberConsumptionProducts = averageConsumption
-        for (key,value) in averageProducing{
-            realNumberProducingRawMaterials[key] = value //Int.random(in: value-a..<value+a)
-        }
-        for (key,value) in averageConsumption{
-            realNumberConsumptionProducts[key] = value //Int.random(in: value-a..<value+a)
-        }
+        super.init(name: name, averageProducing: averageProducing, averageConsumption: averageConsumption, a: a)
         self.popularProducts = popularProducts
         produce()
     }
-    private func produce() {
-
+    override func produce() {
         var materials = realNumberProducingRawMaterials
-      
-        
         popularProducts.forEach({producedProducts[$0] = 0})
         for (key,value) in realNumberProducingRawMaterials{
             producedProducts[key] = value
