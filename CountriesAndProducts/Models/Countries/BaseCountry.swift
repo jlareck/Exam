@@ -10,8 +10,8 @@ import Foundation
 
 class BaseCountry {
     let name: String
-    let averageNumberProducingRawMaterials: [RawMaterial: Int]
-    let averageNumberConsumptionProduct: [Product: Int]
+    private let averageNumberProducingRawMaterials: [RawMaterial: Int]
+    private let averageNumberConsumptionProduct: [Product: Int]
     private(set)var realNumberProducingRawMaterials = [RawMaterial: Int]()
     private(set)var realNumberConsumptionProducts = [Product: Int]()
     var exportProducts = [BaseProduct: Int]()
